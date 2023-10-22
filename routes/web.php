@@ -33,6 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('dependencies',DependenciesController::class);
+    Route::resource('computers',ComputersController::class);
+    Route::get('graphic',[ComputersController::class,'ComputersBydependencies'])->name('graphic');
+    Route::get('reports',[ComputersController::class,'reports'])->name('reports');
 });
 
 require __DIR__.'/auth.php';
