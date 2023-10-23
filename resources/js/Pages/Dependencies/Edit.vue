@@ -10,22 +10,25 @@ const props = defineProps({ dependencies:{type:Object}});
 const form = useForm({
     name:props.dependencies.name
 });
+
+console.log('el props:',props);
+console.log('el props y dependecia:',props.dependencies.name);
 </script>
 
 <template>
-    <Head title="Edit Department" />
+    <Head title="Edit dependencies" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">Edit Department</h2>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">Edit dependencies</h2>
         </template>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <form @submit.prevent="form.patch(route('departments.update',dependencies))"
+                    <form @submit.prevent="form.patch(route('dependencies.update',dependencies))"
                     class="max-w-xl mt-6 space-y-6">
-                    <InputLabel for="name" value="Department"></InputLabel>
+                    <InputLabel for="name" value="dependencies"></InputLabel>
                     <TextInput id="name" v-model="form.name" autofocus required
                     type="text"
                     class="block w-full mt-1"></TextInput>
