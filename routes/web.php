@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\DependenciesController;
+use App\Http\Controllers\ComputersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
