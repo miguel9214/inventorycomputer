@@ -34,7 +34,7 @@ class DependenciesController extends Controller
     }
     public function edit(Dependencies $dependencies)
     {
-        return Inertia::render('Dependencies/Edit',['dependencies' => $dependencies]);
+        return Inertia::render('Dependencies/Edit',['dependencie' => $dependencies]);
     }
     public function update(Request $request, Dependencies $dependencies)
     {

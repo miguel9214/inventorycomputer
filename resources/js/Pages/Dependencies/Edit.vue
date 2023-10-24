@@ -6,13 +6,11 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head,useForm } from '@inertiajs/vue3';
 
-const props = defineProps({'dependencies':{
-    default:'1',
-}});
+const props = defineProps({dependencie:{type:Object}});
 
  
 const form = useForm({
-    name: props.dependencies.name,
+    name: props.dependencie.name,
 });
 
 console.log(props);
@@ -29,7 +27,7 @@ console.log(props);
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <form @submit.prevent="form.patch(route('dependencies.edi',dependencies))"
+                    <form @submit.prevent="form.patch(route('dependencies.edi',dependencie))"
                     class="max-w-xl mt-6 space-y-6">
                     <InputLabel for="name" value="Nombre"></InputLabel>
                     <TextInput id="name" v-model="form.name" autofocus required

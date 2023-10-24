@@ -4,7 +4,9 @@ import DangerButton from '@/Components/DangerButton.vue';
 import { Head,Link,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 
-const props = defineProps(['dependencies']);
+const props = defineProps({
+    dependencies:{type: Object}
+});
 
 const form = useForm({
     id:''
