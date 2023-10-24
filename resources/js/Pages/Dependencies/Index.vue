@@ -4,12 +4,13 @@ import DangerButton from '@/Components/DangerButton.vue';
 import { Head,Link,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 
-const props = defineProps({
-    dependencies: {type:Object}
-});
+const props = defineProps(['dependencies']);
+
 const form = useForm({
     id:''
 });
+
+console.log(props);
 const deleteDepartment = (id,name) =>{
     const alerta = Swal.mixin({
         buttonsStyling:true
@@ -25,6 +26,7 @@ const deleteDepartment = (id,name) =>{
         }
     });
 }
+
 </script>
 
 <template>
@@ -32,7 +34,7 @@ const deleteDepartment = (id,name) =>{
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">dependencies</h2>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">Dependencias</h2>
         </template>
 
         <div class="py-12">
@@ -40,16 +42,16 @@ const deleteDepartment = (id,name) =>{
                 <div class="flex mt-3 mb-3">
                     <Link :href="route('dependencies.create')"
                     :class="'px-4 py-2 bg-gray-800 text-white border rounded-md font-semibold text-xs'">
-                    <i class="fa-solid fa-plus-circle"></i> Add
+                    <i class="fa-solid fa-plus-circle"></i> Crear
                     </Link>
                 </div>
             </div>
-            <div class="grid bg-white v-screen place-items-center">
+            <div class="grid bg-white v-screen place-items-center py-8">
                 <table class="border border-gray-400 table-auto">
                     <thead>
                         <tr class="bg-gray-100">
                             <th class="px-4 py-4">#</th>
-                            <th class="px-4 py-4">dependencies</th>
+                            <th class="px-4 py-4">Dependencias</th>
                             <th class="px-4 py-4"></th>
                             <th class="px-4 py-4"></th>
                         </tr>
@@ -64,7 +66,7 @@ const deleteDepartment = (id,name) =>{
                             <i class="fa-solid fa-edit"></i>
                             </Link>
                         </td>
-                        <td class="px-4 py-4 border border-gray-400">
+                        <td class="px-4 py-4 border border-gray-400">                      
                             <DangerButton @click="deleteDepartment(dep.id,dep.name)">
                                 <i class="fa-solid fa-trash"></i>
                             </DangerButton>

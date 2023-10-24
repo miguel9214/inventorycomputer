@@ -34,11 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::resource('dependencies',DependenciesController::class);
-    Route::resource('computers',ComputersController::class);
-    Route::get('graphic',[ComputersController::class,'ComputersBydependencies'])->name('graphic');
-    Route::get('reports',[ComputersController::class,'reports'])->name('reports');
 });
+
+Route::resource('dependencies',DependenciesController::class)->middleware(['auth', 'verified']);
+Route::resource('computers',ComputersController::class)->middleware(['auth', 'verified']);
+Route::get('graphic',[ComputersController::class,'ComputersBydependencies'])->name('graphic')->middleware(['auth', 'verified']);
+Route::get('reports',[ComputersController::class,'reports'])->name('reports')->middleware(['auth', 'verified']);
+
+
 
 require __DIR__.'/auth.php';

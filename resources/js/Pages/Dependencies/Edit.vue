@@ -6,13 +6,16 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head,useForm } from '@inertiajs/vue3';
 
-const props = defineProps({ dependencies:{type:Object}});
+const props = defineProps({'dependencies':{
+    default:'1',
+}});
+
+ 
 const form = useForm({
-    name:props.dependencies.name
+    name: props.dependencies.name,
 });
 
-console.log('el props:',props);
-console.log('el props y dependecia:',props.dependencies.name);
+console.log(props);
 </script>
 
 <template>
@@ -20,15 +23,15 @@ console.log('el props y dependecia:',props.dependencies.name);
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">Edit dependencies</h2>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">Editar dependencia</h2>
         </template>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="p-4 overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <form @submit.prevent="form.patch(route('dependencies.update',dependencies))"
+                    <form @submit.prevent="form.patch(route('dependencies.edi',dependencies))"
                     class="max-w-xl mt-6 space-y-6">
-                    <InputLabel for="name" value="dependencies"></InputLabel>
+                    <InputLabel for="name" value="Nombre"></InputLabel>
                     <TextInput id="name" v-model="form.name" autofocus required
                     type="text"
                     class="block w-full mt-1"></TextInput>

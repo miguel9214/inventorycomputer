@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('printer', 100);
             $table->string('scanner', 100);
             // Relacion de la tabla computadores con la tabla depenedecias.
-            $table->foreignId('dependencies_id')->constrained('dependencies')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('dependencies_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

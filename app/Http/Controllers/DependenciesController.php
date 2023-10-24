@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dependencies;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -10,8 +11,7 @@ class DependenciesController extends Controller
 {
     public function index()
     {
-        $dependencies = Dependencies::all();
-        return Inertia::render('Dependencies/Index',['dependencies' => $dependencies]);
+        return Inertia::render('Dependencies/Index',['dependencies' => Dependencies::with('user:id,name')->latest()->get()]);
     }
 
     public function create()
@@ -19,12 +19,14 @@ class DependenciesController extends Controller
         return Inertia::render('Dependencies/Create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
-        $request->validate(['name' => 'required|max:100']);
-        $dependencies = new Dependencies($request->input());
-        $dependencies->save();
-        return redirect('dependencies');
+        $validated=$request->validate([
+            'name' => 'required|max:100'
+        ]);
+        $request->user()->dependencies()->create($validated);
+
+        return redirect(route('dependencies.index'));
     }
     public function show(Dependencies $dependencies)
     {
@@ -36,9 +38,15 @@ class DependenciesController extends Controller
     }
     public function update(Request $request, Dependencies $dependencies)
     {
-        $request->validate(['name' => 'required|max:100']);
-        $dependencies->update($request->all());
-        return redirect('depenedencies');
+
+        $this->authorize('update', $dependencies);
+
+        $validated=$request->validate([
+            'name' => 'required|max:100'
+        ]);
+        $dependencies->update($validated);
+
+        return redirect(route('dependencies.index'));
     }
     public function destroy(Dependencies $dependencies)
     {
